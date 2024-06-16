@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/provider/theme-provider";
 import { siteConfig } from "@/config/site";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -58,14 +59,16 @@ export default function RootLayout({
           content="NyaIMHJt9--uZGUgzJpGQPNcUJtVLtvaEkodqOuJ7-I"
         />
       </head>
-      <body className={`${inter.className} bg-primary-foreground/35 `}>
+      <body className={`${inter.className} `}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <ScrollArea className="h-screen w-screen">
+            {children}
+          </ScrollArea>
         </ThemeProvider>
       </body>
     </html>
