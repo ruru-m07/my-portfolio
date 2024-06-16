@@ -26,6 +26,7 @@ const Navbar = () => {
           <Link
             href={"https://github.com/ruru-m07"}
             target="_blank"
+            aria-label="github"
             className={cn(
               buttonVariants({
                 variant: "outline",
@@ -41,6 +42,7 @@ const Navbar = () => {
           <Link
             href={"https://twitter.com/ruru_dev07"}
             target="_blank"
+            aria-label="Twitter"
             className={cn(
               buttonVariants({
                 variant: "outline",
@@ -64,6 +66,7 @@ const Navbar = () => {
           <Link
             href={"https://www.instagram.com/ruru.dev07"}
             target="_blank"
+            aria-label="instagram"
             className={cn(
               buttonVariants({
                 variant: "outline",
