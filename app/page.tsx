@@ -7,8 +7,8 @@ export default function Home() {
     <main className="mx-10 lg:mx-56">
       <Navbar />
       <section className=" h-screen flex items-center justify-between">
-        <div className=" w-3/5">
-          <p className="leading-7 [&:not(:first-child)]:mt-6 text-muted-foreground">
+        <div className=" w-3/5 text-black">
+          <p className="leading-7 [&:not(:first-child)]:mt-6 text-muted">
             Het there!
           </p>
           <h1 className="scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl">
@@ -20,14 +20,19 @@ export default function Home() {
           </blockquote>
         </div>
         <div>
-          <Card className="p-5 rounded-[45px] bg-primary-foreground/70 h-72 w-72">
+          <Card className="p-5 relative rounded-[45px] bg-primary-foreground/70 h-72 w-72">
             <Image
               src={"/ruru.png"}
               alt="ruru"
               width={600}
               height={600}
-              className="h-full w-full rounded-[25px] grayscale "
+              className="h-full w-full rounded-[25px]  "
             />
+            <Image src={"/kitty.png"}
+              alt="ruru"
+              width={80}
+              height={80}
+              className=" rounded-[25px] absolute top-9 right-44   "/>
           </Card>
         </div>
       </section>
