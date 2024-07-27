@@ -58,10 +58,10 @@ export default function RootLayout({
           content="NyaIMHJt9--uZGUgzJpGQPNcUJtVLtvaEkodqOuJ7-I"
         />
       </head>
-      <body className={`${inter.className} bg-primary-foreground/35 `}>
+      <body className={`${inter.className} bg-pink-300 `}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
