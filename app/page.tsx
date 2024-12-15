@@ -66,7 +66,9 @@ export default function Home() {
               height={80}
               className={cn(
                 "rounded-[25px] absolute",
-                imageSrc === "/cat.jpg" ? "top-[130px] right-44 -rotate-45" : "top-11 right-10 rotate-45"
+                imageSrc === "/cat.jpg"
+                  ? "top-[130px] right-44 -rotate-45"
+                  : "top-11 right-10 rotate-45"
               )}
             />
           </Card>
