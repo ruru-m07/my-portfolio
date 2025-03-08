@@ -17,7 +17,7 @@ export function Nav() {
           className="size-8 rounded-full"
         />
       </Link>
-      <NavLink href="/blog">Blog</NavLink>
+      {/* <NavLink href="/blog">Blog</NavLink> */}
     </nav>
   );
 }
