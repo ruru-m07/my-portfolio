@@ -1,49 +1,18 @@
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/provider/theme-provider";
-import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/cn";
+import { createMetadata } from "@/lib/metadata";
+import { Main } from "./layout.client";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: {
-    default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
+    absolute: "Ruru",
+    template: "Ruru | %s",
   },
-  metadataBase: new URL(siteConfig.url),
-  description: siteConfig.description,
-  keywords:
-    "web development, full-stack, front-end, back-end, ruru, ruru-m07, ruru.dev07, ruru-dev",
-  authors: [
-    {
-      name: "Ruru",
-      url: "https://github.com/ruru-m07/",
-    },
-  ],
-  creator: "Ruru",
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: siteConfig.url,
-    title: siteConfig.name,
-    description: siteConfig.description,
-    siteName: siteConfig.name,
-    images: [
-      {
-        url: siteConfig.ogImage,
-        width: 1200,
-        height: 630,
-        alt: siteConfig.name,
-      },
-    ],
-  },
-  icons: {
-    icon: "/favicon_io/favicon.ico",
-    shortcut: "/favicon_io/favicon-16x16.png",
-    apple: "/favicon_io/apple-touch-icon.png",
-  },
-};
+  description: "My personal website. 🐱",
+});
 
 export default function RootLayout({
   children,
@@ -52,21 +21,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <meta
-          name="google-site-verification"
-          content="NyaIMHJt9--uZGUgzJpGQPNcUJtVLtvaEkodqOuJ7-I"
-        />
-      </head>
-      <body className={`${inter.className} bg-pink-300 `}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+      <body
+        className={cn(
+          inter.className,
+          "bg-neutral-950 text-neutral-50 min-h-screen dark"
+        )}
+      >
+        <Main>{children}</Main>
       </body>
     </html>
   );
