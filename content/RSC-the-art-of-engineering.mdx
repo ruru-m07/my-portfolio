@@ -1,0 +1,191 @@
+---
+title: RSC - The Art Of Engineering
+description: Behind the scenes of React Server Components
+date: 2025-03-08
+---
+
+## RSC - The Art Of Engineering
+
+The Magic Behind React Server Components
+
+### Concept
+
+RSC (**R**eact **S**erver **C**omponents) gently whispers _"do not render on the client."_ 
+
+Unlike traditional SSR (Server-Side Rendering), RSC allows components to execute *only* on the server, with just their output being sent to the client. This creates a beautiful relationship where server components can access server resources directly while keeping client bundles tiny.
+
+To demonstrate this delightful technology, we need a modern framework that supports RSC, like Next.js App Router.
+
+### Example: Real React Server Components
+
+Let's create a proper example that demonstrates true RSC. First, create a new Next.js project:
+
+```bash
+bunx create-next-app@latest rsc-demo --app
+cd rsc-demo
+```
+
+Next.js App Router implements RSC natively, so we'll use it to demonstrate the magic. Here's how a real RSC implementation looks:
+
+```jsx
+import { db } from '@/lib/db';
+import ClientCounter from '@/components/ClientCounter';
+
+// ! This component runs **ONLY** on the server
+export default async function HomePage() {
+  // ? Server-only code: Data fetching directly from a database
+  // ? This code __ never reaches the client! __
+  const products = await db.products.getAll();
+  
+  return (
+    <div className="home-page">
+      <h1>Welcome to RSC Demo!</h1>
+      
+      <h2>Product List (Server Component)</h2>
+      <ul>
+        {products.map(product => (
+          <li key={product.id}>{product.name} - ${product.price}</li>
+        ))}
+      </ul>
+      
+      <ClientCounter />
+    </div>
+  );
+}
+```
+
+```jsx
+'use client'; // <-- This component runs on the client
+
+import { useState } from 'react';
+
+export default function ClientCounter() {
+  const [count, setCount] = useState(0);
+  
+  return (
+    <div className="counter">
+      <h2>Interactive Counter (Client Component)</h2>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
+    </div>
+  );
+}
+```
+
+```js
+// ! lib/db.js <-- Server-only module
+export const db = {
+  products: {
+    getAll: async () => {
+      // ? In a real app, this would query a database
+      return [
+        { id: 1, name: 'Fluffy Cat Toy', price: 9.99 },
+        { id: 2, name: 'Dog Treat Dispenser', price: 24.99 },
+        { id: 3, name: 'Bird Swing', price: 14.50 },
+      ];
+    }
+  }
+};
+```
+
+### What's Actually Happening Behind the Scenes 🔍
+
+When using RSC, the magic happens through a completely different mechanism than SSR:
+
+1. The server components execute on the server and generate a special RSC payload (not HTML!)
+2. This RSC payload is streamed to the client
+3. The client React runtime then processes this payload to create and update the UI
+
+Let's look at what an RSC payload might look like (simplified):
+
+```json
+["$", "div", {"className": "home-page"}, [
+  ["$", "h1", null, "Welcome to RSC Demo!"],
+  ["$", "h2", null, "Product List (Server Component)"],
+  ["$", "ul", null, [
+    ["$", "li", {"key": "1"}, "Fluffy Cat Toy - $9.99"],
+    ["$", "li", {"key": "2"}, "Dog Treat Dispenser - $24.99"],
+    ["$", "li", {"key": "3"}, "Bird Swing - $14.50"]
+  ]],
+  ["$L", ["ClientCounter", {}, "components_ClientCounter"]]
+]]
+```
+
+Notice how the server components are serialized directly, but the client component (`ClientCounter`) is referenced by a module identifier (`$L`) that the client will need to load separately.
+
+### The Big Difference Between RSC and SSR 
+
+SSR (what was in our previous examples) renders everything to HTML on the server. RSC is fundamentally different:
+
+| **Server-Side Rendering (SSR)** | **React Server Components (RSC)** |
+|-----------------|-------------------|
+| Renders entire page to HTML | Components execute on server, but output is a special React format |
+| Client needs to hydrate everything | Client only hydrates client components |
+| All components ship to client | Server component code never reaches the client |
+| Good for initial load | Good for initial load AND updates |
+
+### Streaming with RSC 
+
+One of the cutest features of RSC is streaming! It lets parts of your UI appear as soon as they're ready:
+
+```jsx
+export default async function Dashboard() {
+  return (
+    <div className="dashboard">
+      <h1>Dashboard 📊</h1>
+      
+      <header>Welcome back!</header>
+      
+      <Suspense fallback={<p>Loading stats...</p>}>
+        <Stats />
+      </Suspense>
+      
+      <Suspense fallback={<p>Loading recommendations...</p>}>
+        <Recommendations />
+      </Suspense>
+    </div>
+  );
+}
+
+async function Stats() {
+  const stats = await fetchStats(); // ! might take 500ms
+  return <div className="stats">{/* render stats */}</div>;
+}
+
+async function Recommendations() {
+  const recs = await fetchRecommendations(); // ! might take 2000ms
+  return <div className="recommendations">{/* render recommendations */}</div>;
+}
+```
+
+### Why RSC is Super Adorable
+
+RSC brings several delightful benefits to your React applications:
+
+1. **Zero Bundle Size** - Server components don't add any JavaScript to your client bundle!
+
+2. **Direct Backend Access** - Server components can talk directly to your database without API layers.
+
+3. **Automatic Code Splitting** - Client components are automatically code-split.
+
+4. **Progressive Loading** - Parts of your UI can load and appear incrementally.
+
+5. **No Waterfalls** - Data fetching can happen in parallel on the server.
+
+### Best Practices for Your RSC Journey 
+
+Here are some friendly tips for working with React Server Components:
+
+- **Keep Most Components as Server Components** - Only add 'use client' when you need interactivity
+- **Fetch Data in Server Components** - Take advantage of direct backend access
+- **Use Suspense for Loading States** - Embrace the streaming model with Suspense boundaries
+- **Pass Data, Not Promises** - Resolve promises in server components, pass data to client components
+
+### Conclusion: RSC is the Future! 
+
+React Server Components represent one of the cutest evolutions in React's development model. They're not just a performance optimization - they're a fundamentally new way to build React applications that gives you the best of both server and client worlds.
+
+So go ahead and try out RSC in your next project - your users (and your server's CPU) will thank you with tiny digital hugs! 
+
