@@ -11,7 +11,7 @@ export const metadata = createMetadata({
     absolute: "Ruru",
     template: "Ruru | %s",
   },
-  description: "My personal website. 🐱",
+  description: "My personal website.",
 });
 
 export default function RootLayout({
@@ -24,7 +24,7 @@ export default function RootLayout({
       <body
         className={cn(
           inter.className,
-          "bg-neutral-950 text-neutral-50 min-h-screen dark"
+          "bg-[#020202] text-neutral-50 min-h-screen dark"
         )}
       >
         <Main>{children}</Main>
