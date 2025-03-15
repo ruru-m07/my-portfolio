@@ -216,7 +216,7 @@ export default function Home() {
               filter: "blur(0px)",
               opacity: 1,
               y: 0,
-              transition: { duration: 0.7, delay: 0.5, ease: "easeOut" },
+              transition: { duration: 0.7, delay: 1.3, ease: "easeOut" },
             },
           }}
         >
@@ -228,7 +228,7 @@ export default function Home() {
         className="flex items-center gap-3 border-t mt-4 pt-4 border-neutral-800"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
+        transition={{ delay: 1.6, duration: 0.7 }}
       >
         <Badge href="https://github.com/ruru-m07">
           <svg role="img" viewBox="0 0 24 24" className="size-4">
