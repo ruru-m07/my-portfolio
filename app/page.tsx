@@ -11,10 +11,13 @@ export default function Home() {
         initial="hidden"
         animate="visible"
         variants={{
-          hidden: { opacity: 0, y: -10 },
+          hidden: {
+            filter: "blur(8px)",
+            opacity: 0,
+          },
           visible: {
             opacity: 1,
-            y: 0,
+            filter: "blur(0px)",
             transition: { duration: 0.7, ease: "easeOut" },
           },
         }}
