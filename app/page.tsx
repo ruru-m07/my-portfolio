@@ -174,9 +174,20 @@ export default function Home() {
           <span className="text-[--primary-text]">cats.</span> I also love
           reading <span className="text-[--primary-text]">blogs</span>,
           <span className="text-[--primary-text]"> books</span>, and{" "}
-          <span className="text-[--primary-text]">articles</span> about tech and
-          design. I'm always looking for new things to learn and new people to
-          meet.
+          <span className="text-[--primary-text]">articles</span> about tech and{" "}
+          <motion.span
+            variants={{
+              hidden: { filter: "blur(8px)", opacity: 0 },
+              visible: {
+                filter: "blur(0px)",
+                opacity: 1,
+                transition: { duration: 0.5, ease: "easeOut" },
+              },
+            }}
+          >
+            design. I'm always looking for new things to learn and new people to
+            meet.
+          </motion.span>
         </motion.span>
 
         <br />
@@ -188,7 +199,11 @@ export default function Home() {
             visible: {
               filter: "blur(0px)",
               opacity: 1,
-              transition: { duration: 0.5, ease: "easeOut" },
+              transition: {
+                duration: 0.5,
+                ease: "easeOut",
+                delay: 1.5,
+              },
             },
           }}
         >
@@ -212,19 +227,27 @@ export default function Home() {
         <br />
         <br />
 
-        <motion.span
-          variants={{
-            hidden: { filter: "blur(8px)", opacity: 0, y: 5 },
-            visible: {
-              filter: "blur(0px)",
-              opacity: 1,
-              y: 0,
-              transition: { duration: 0.7, delay: 1.3, ease: "easeOut" },
-            },
-          }}
-        >
-          ~ yes, I'm a cat employee...
-        </motion.span>
+        {["~ yes", ", I'm", " a cat", " employee", "..."].map((v, i) => (
+          <motion.span
+            key={i}
+            variants={{
+              hidden: { filter: "blur(8px)", opacity: 0, y: 5 },
+              visible: {
+                filter: "blur(0px)",
+                opacity: 1,
+                y: 0,
+                transition: {
+                  duration: 0.7,
+                  delay: 1.3 + i * 0.1,
+                  ease: "easeOut",
+                },
+              },
+            }}
+          >
+            {v}
+          </motion.span>
+        ))}
+        <br />
       </motion.p>
 
       <motion.div
