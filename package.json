@@ -24,7 +24,7 @@
     "feed": "^4.2.2",
     "framer-motion": "^12.5.0",
     "fuma-content": "^0.0.2",
-    "next": "14.2.5",
+    "next": "14.2.21",
     "next-auth": "5.0.0-beta.19",
     "phenomenon": "^1.6.0",
     "postcss-lightningcss": "^1.0.0",
