@@ -85,6 +85,7 @@ export default function Home() {
           >
             @oraczen
           </motion.a>,
+          " while pursuing a Software Engineering degree in India.",
         ].map((item, index) =>
           typeof item === "string" ? (
             <motion.span
@@ -122,13 +123,19 @@ export default function Home() {
           looking for new challenges. I'm a big fan of{" "}
         </motion.span>
         {[
-          { text: "React, ", highlight: true },
-          { text: "TypeScript, ", highlight: true },
-          { text: "Tailwind CSS. ", highlight: true },
+          { text: "React", highlight: true },
+          { text: ", ", highlight: false },
+          { text: "TypeScript", highlight: true },
+          { text: ", and ", highlight: false },
+          { text: "Tailwind CSS", highlight: true },
+          { text: ". ", highlight: false },
           { text: " I also have experience with ", highlight: false },
-          { text: "Node.js, ", highlight: true },
-          { text: "Express, ", highlight: true },
-          { text: "Docker. ", highlight: true },
+          { text: "Node.js", highlight: true },
+          { text: ", ", highlight: false },
+          { text: "Express", highlight: true },
+          { text: ", and ", highlight: false },
+          { text: "Docker", highlight: true },
+          { text: ". ", highlight: false },
         ].map((item, i) => (
           <motion.span key={i}>
             <motion.span
