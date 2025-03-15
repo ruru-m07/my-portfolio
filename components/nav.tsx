@@ -4,19 +4,33 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 export function Nav() {
   return (
     <nav className="flex items-center gap-3 mb-4 max-w-[600px] mx-auto">
-      <Link href="/" className="mr-auto">
-        <Image
-          alt="Me"
-          src="/me.png"
-          width="40"
-          height="40"
-          className="size-8 rounded-full"
-        />
-      </Link>
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: { opacity: 0, y: -10 },
+          visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.7, ease: "easeOut" },
+          },
+        }}
+      >
+        <Link href="/" className="mr-auto">
+          <Image
+            alt="Me"
+            src="/me.png"
+            width="40"
+            height="40"
+            className="size-8 rounded-full"
+          />
+        </Link>
+      </motion.div>
       {/* <NavLink href="/blog">Blog</NavLink> */}
     </nav>
   );

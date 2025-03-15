@@ -1,52 +1,228 @@
+"use client";
+
 import { cn } from "@/lib/cn";
 import type { ReactNode } from "react";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
     <article>
-      <h1 className="text-xl font-semibold mb-4">I'm Ruru</h1>
+      <motion.h1
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: { opacity: 0, y: -10 },
+          visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.7, ease: "easeOut" },
+          },
+        }}
+        className="text-xl font-semibold mb-4"
+      >
+        I'm Ruru
+      </motion.h1>
 
-      <p className="text-sm text-neutral-400">
-        I'm a software engineer passionate about web{" "}
-        <span className="text-[--primary-text]">development</span> and{" "}
-        <span className="text-[--primary-text]">design</span>. Currently working as a
-        frontend guy at{" "}
-        <a
-          href="https://x.com/oraczen"
-          className="font-semibold text-[--primary-text] underline"
+      <motion.p
+        className="text-sm text-neutral-400"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: {},
+          visible: {
+            transition: {
+              staggerChildren: 0.04,
+              delayChildren: 0.3,
+              ease: "easeOut",
+            },
+          },
+        }}
+      >
+        {[
+          "I'm a software engineer passionate about web ",
+          <motion.span
+            key="dev"
+            className="text-[--primary-text]"
+            variants={{
+              hidden: { filter: "blur(8px)", opacity: 0 },
+              visible: {
+                filter: "blur(0px)",
+                opacity: 1,
+                transition: { duration: 0.6, ease: "easeOut" },
+              },
+            }}
+          >
+            development
+          </motion.span>,
+          " and ",
+          <motion.span
+            key="design"
+            className="text-[--primary-text]"
+            variants={{
+              hidden: { filter: "blur(8px)", opacity: 0 },
+              visible: {
+                filter: "blur(0px)",
+                opacity: 1,
+                transition: { duration: 0.6, ease: "easeOut" },
+              },
+            }}
+          >
+            design
+          </motion.span>,
+          ". Currently working as a frontend guy at ",
+          <motion.a
+            key="link"
+            href="https://x.com/oraczen"
+            className="font-semibold text-[--primary-text] underline"
+            variants={{
+              hidden: { filter: "blur(8px)", opacity: 0 },
+              visible: {
+                filter: "blur(0px)",
+                opacity: 1,
+                transition: { duration: 0.6, ease: "easeOut" },
+              },
+            }}
+          >
+            @oraczen
+          </motion.a>,
+        ].map((item, index) =>
+          typeof item === "string" ? (
+            <motion.span
+              key={index}
+              variants={{
+                hidden: { filter: "blur(8px)", opacity: 0 },
+                visible: {
+                  filter: "blur(0px)",
+                  opacity: 1,
+                  transition: { duration: 0.6, ease: "easeOut" },
+                },
+              }}
+            >
+              {item}
+            </motion.span>
+          ) : (
+            item
+          )
+        )}
+
+        <br />
+        <br />
+
+        <motion.span
+          variants={{
+            hidden: { filter: "blur(8px)", opacity: 0 },
+            visible: {
+              filter: "blur(0px)",
+              opacity: 1,
+              transition: { duration: 0.5, ease: "easeOut" },
+            },
+          }}
         >
-          @oraczen
-        </a>{" "}
-        while pursuing a Software Engineering degree in India.
+          I build things that don't crash <s>(most days)</s>, and I'm always
+          looking for new challenges. I'm a big fan of{" "}
+        </motion.span>
+        {[
+          { text: "React, ", highlight: true },
+          { text: "TypeScript, ", highlight: true },
+          { text: "Tailwind CSS. ", highlight: true },
+          { text: " I also have experience with ", highlight: false },
+          { text: "Node.js, ", highlight: true },
+          { text: "Express, ", highlight: true },
+          { text: "Docker. ", highlight: true },
+        ].map((item, i) => (
+          <motion.span key={i}>
+            <motion.span
+              className={item.highlight ? "text-[--primary-text]" : ""}
+              variants={{
+                hidden: { filter: "blur(8px)", opacity: 0 },
+                visible: {
+                  filter: "blur(0px)",
+                  opacity: 1,
+                  transition: { duration: 0.5, ease: "easeOut" },
+                },
+              }}
+            >
+              {item.text}
+            </motion.span>
+          </motion.span>
+        ))}
+
         <br />
-        <br />I build things that don't crash <s>(most days)</s>, and I'm always
-        looking for new challenges. I'm a big fan of{" "}
-        <span className="text-[--primary-text]">React</span>,{" "}
-        <span className="text-[--primary-text]">TypeScript</span>, and{" "}
-        <span className="text-[--primary-text]">Tailwind CSS</span>. I also have experience
-        with <span className="text-[--primary-text]">Node.js</span>,{" "}
-        <span className="text-[--primary-text]">Express</span>, and{" "}
-        <span className="text-[--primary-text]">Docker</span>.
+        <br />
+
+        <motion.span
+          variants={{
+            hidden: { filter: "blur(8px)", opacity: 0 },
+            visible: {
+              filter: "blur(0px)",
+              opacity: 1,
+              transition: { duration: 0.5, ease: "easeOut" },
+            },
+          }}
+        >
+          <u>Besides</u>, I love{" "}
+          <span className="text-[--primary-text]">cats.</span> I also love
+          reading <span className="text-[--primary-text]">blogs</span>,
+          <span className="text-[--primary-text]"> books</span>, and{" "}
+          <span className="text-[--primary-text]">articles</span> about tech and
+          design. I'm always looking for new things to learn and new people to
+          meet.
+        </motion.span>
+
         <br />
         <br />
-        <u>Besides</u>, I love <span className="text-[--primary-text]">cats.</span> I also
-        love reading <span className="text-[--primary-text]">blogs</span>,
-        <span className="text-[--primary-text]"> books</span>, and{" "}
-        <span className="text-[--primary-text]">articles</span> about tech and design. I'm
-        always looking for new things to learn and new people to meet.
+
+        <motion.span
+          variants={{
+            hidden: { filter: "blur(8px)", opacity: 0 },
+            visible: {
+              filter: "blur(0px)",
+              opacity: 1,
+              transition: { duration: 0.5, ease: "easeOut" },
+            },
+          }}
+        >
+          I'm available for{" "}
+          <span className="text-[--primary-text]">meaningful projects</span> and{" "}
+          <span className="text-[--primary-text]">
+            professional connections
+          </span>
+          . Schedule a{" "}
+          <a
+            href="https://cal.com/ruru-meow"
+            target="_blank"
+            rel="noreferrer"
+            className="underline text-[--primary-text]"
+          >
+            quick chat
+          </a>{" "}
+          if you have something interesting in mind.
+        </motion.span>
+
         <br />
         <br />
-        I'm available for{" "}
-        <span className="text-[--primary-text]">meaningful projects</span> and{" "}
-        <span className="text-[--primary-text]">professional connections</span>. Schedule a{" "}
-        <a href="https://cal.com/ruru-meow" target="_blank" rel="noreferrer" className="underline text-[--primary-text]">
-          quick chat
-        </a>{" "}
-        if you have something interesting in mind.
-        <br />
-        <br />~ yes, I'm a cat employee...
-      </p>
-      <div className="flex items-center gap-3 border-t mt-4 pt-4 border-neutral-800">
+
+        <motion.span
+          variants={{
+            hidden: { filter: "blur(8px)", opacity: 0, y: 5 },
+            visible: {
+              filter: "blur(0px)",
+              opacity: 1,
+              y: 0,
+              transition: { duration: 0.7, delay: 0.5, ease: "easeOut" },
+            },
+          }}
+        >
+          ~ yes, I'm a cat employee...
+        </motion.span>
+      </motion.p>
+
+      <motion.div
+        className="flex items-center gap-3 border-t mt-4 pt-4 border-neutral-800"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.8 }}
+      >
         <Badge href="https://github.com/ruru-m07">
           <svg role="img" viewBox="0 0 24 24" className="size-4">
             <title>GitHub</title>
@@ -84,7 +260,7 @@ export default function Home() {
             ></path>
           </svg>
         </Badge>
-      </div>
+      </motion.div>
     </article>
   );
 }
